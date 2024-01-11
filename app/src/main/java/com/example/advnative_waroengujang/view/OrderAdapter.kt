@@ -6,31 +6,25 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.advnative_waroengujang.R
+import com.example.advnative_waroengujang.databinding.OrderItemBinding
 import com.example.advnative_waroengujang.model.Order
 
-class OrderAdapter(var orderList:ArrayList<Order>) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
-    class OrderViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+class OrderAdapter(val orderList:ArrayList<Order>) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
+    class OrderViewHolder(val binding: OrderItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.order_item, parent, false)
-
-        return OrderViewHolder(view)
+        val binding = OrderItemBinding.inflate(
+            LayoutInflater.from(parent.context),parent,false)
+        return OrderViewHolder(binding)
 
     }
 
     override fun getItemCount(): Int = orderList.size
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        val lblTableNumberOrder = holder.view.findViewById<TextView>(R.id.lblTableNumberOrder)
-        val lblTotalPrice = holder.view.findViewById<TextView>(R.id.lblTotalPrice)
-        val lblDuration = holder.view.findViewById<TextView>(R.id.lblDuration)
-
-        lblTableNumberOrder.text = orderList[position].table_number
-        lblTotalPrice.text = "IDR " +  orderList[position].total_price
-        lblDuration.text = "Duration: " + orderList[position].duration
+        holder.binding.orderitem = orderList[position]
     }
 
     fun updateListOrder(newOrderList: ArrayList<Order>) {

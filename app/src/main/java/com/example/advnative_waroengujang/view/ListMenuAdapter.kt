@@ -10,38 +10,27 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.advnative_waroengujang.R
+import com.example.advnative_waroengujang.databinding.MenuListItemBinding
 import com.example.advnative_waroengujang.model.Menu
 import com.example.advnative_waroengujang.view.ListMenuFragment.Companion.positionSelected
 import com.squareup.picasso.Picasso
 
 class ListMenuAdapter(val menuList:ArrayList<Menu>) :RecyclerView.Adapter<ListMenuAdapter.MenuViewHolder>() {
-    class MenuViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+    class MenuViewHolder(val binding: MenuListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.menu_list_item, parent, false)
-        return MenuViewHolder(view)
+        val binding = MenuListItemBinding.inflate(
+            LayoutInflater.from(parent.context),parent,false)
+        return MenuViewHolder(binding)
     }
 
     override fun getItemCount(): Int = menuList.size
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-        val lblMenuName = holder.view.findViewById<TextView>(R.id.lblMenuName)
-        val lblMenuPrice = holder.view.findViewById<TextView>(R.id.lblMenuPrice)
-        val cardMenu = holder.view.findViewById<CardView>(R.id.cardMenu)
-        val imgMenu = holder.view.findViewById<ImageView>(R.id.imgMenu)
+        holder.binding.menulist = menuList[position]
 
-        Picasso.get().load(menuList[position].photo).into(imgMenu)
-
-        lblMenuName.text = menuList[position].name
-        lblMenuPrice.text = "IDR " +  menuList[position].price
-        cardMenu.setOnClickListener {
-            positionSelected = position
-            val action = ListMenuFragmentDirections.actionListMenuFragmentToDetailMenuFragment()
-            Navigation.findNavController(it).navigate(action)
-        }
     }
 
     fun updateListMenu(newMenuList: ArrayList<Menu>) {
