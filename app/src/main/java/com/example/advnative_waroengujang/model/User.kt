@@ -1,7 +1,14 @@
 package com.example.advnative_waroengujang.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+
+@Entity
 data class User (
-    val name: String?,
-    val username: String?,
-    val password: String?,
+    @ColumnInfo(name="name")
+    var name:String,
+    @ColumnInfo(name="username")
+    var username:String,
+    @ColumnInfo(name="password")
+    var password:String
 )

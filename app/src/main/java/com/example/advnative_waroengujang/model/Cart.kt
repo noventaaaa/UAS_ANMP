@@ -1,7 +1,14 @@
 package com.example.advnative_waroengujang.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+
+@Entity
 data class Cart(
-    val menu_name:String?,
-    val menu_price:String?,
-    var quantity:String?
+    @ColumnInfo(name="menu_name")
+    var menu_name:String,
+    @ColumnInfo(name="menu_price")
+    var menu_price:String,
+    @ColumnInfo(name="quantity")
+    var quantity:String,
 )

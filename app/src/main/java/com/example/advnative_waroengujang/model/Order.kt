@@ -1,8 +1,16 @@
 package com.example.advnative_waroengujang.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+
+@Entity
 data class Order (
-    val table_number:String?,
-    val total_price:String?,
-    val duration:String?,
-    val detail_order:String?,
+    @ColumnInfo(name="table_number")
+    var table_number:String,
+    @ColumnInfo(name="total_price")
+    var total_price:String,
+    @ColumnInfo(name="duration")
+    var duration:String,
+    @ColumnInfo(name="detail_order")
+    var detail_order:String
 )
