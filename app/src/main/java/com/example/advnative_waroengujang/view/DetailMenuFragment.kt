@@ -9,25 +9,33 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.advnative_waroengujang.R
+import com.example.advnative_waroengujang.databinding.FragmentDetailMenuBinding
 import com.example.advnative_waroengujang.model.Cart
 import com.example.advnative_waroengujang.view.HomeFragment.Companion.tableNumber
 import com.example.advnative_waroengujang.viewmodel.ListMenuModel
+import com.example.advnative_waroengujang.viewmodel.ListOrderModel
 import com.squareup.picasso.Picasso
 
-class DetailMenuFragment : Fragment() {
+class DetailMenuFragment : Fragment(),ButtonAddClickListener,ButtonplusClickListener,ButtonMinClickListener {
     private lateinit var viewModel: ListMenuModel
+    private lateinit var userModel: ListMenuModel
+    private lateinit var orderModel: ListOrderModel
+    private lateinit var dataBindingModel: FragmentDetailMenuBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_menu, container, false)
+        dataBindingModel = DataBindingUtil.inflate(inflater,R.layout.fragment_detail_menu,container,false)
+        return dataBindingModel.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,4 +88,17 @@ class DetailMenuFragment : Fragment() {
             Toast.makeText(this.context, "Menu added to cart!", Toast.LENGTH_LONG).show()
         }
     }
+
+    override fun onButtonAddClick(v: View) {
+        val action = DetailMenuFragmentDirections.actionDetailMenuFragmentToCartFragment()
+        Navigation.findNavController(v).navigate(action)
+    }
+
+    override fun onButtonplusClick(v: View) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onButtonMinClick(v: View) {
+        TODO("Not yet implemented")
+            }
 }

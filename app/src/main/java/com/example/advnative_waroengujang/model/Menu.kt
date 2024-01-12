@@ -5,13 +5,6 @@ import androidx.room.Entity
 
 @Entity
 data class Menu(
-//    val id:String?,
-//    val name:String?,
-//    val description:String?,
-//    val price:String?,
-//    val photo:String?,
-//    val category:String?
-
     @ColumnInfo(name="id")
     var id:String,
     @ColumnInfo(name="name")
